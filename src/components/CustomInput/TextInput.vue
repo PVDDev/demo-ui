@@ -22,7 +22,7 @@
 <script setup lang="ts">
 defineProps({
   label: String,
-  id: { type: String, required: true },
+  id: { type: String, required: true, default: '' },
   placeholder: {
     type: String,
     default: 'Enter your input'
@@ -40,7 +40,7 @@ defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const updateValue = (event) => {
+const updateValue = (event: any) => {
   emit('update:modelValue', event.target.value);
 };
 </script>

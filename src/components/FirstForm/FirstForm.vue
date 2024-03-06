@@ -4,7 +4,7 @@
     <AddTodo @add-todo="createTodo" />
     <ul class="flex flex-col gap-4 list-none" name="todoList">
       <TodoItem
-        v-for="(todo, idx) in todos"
+        v-for="(todo, idx) in todoLocal"
         :key="idx"
         :data="todo"
         :id="idx"
@@ -13,8 +13,8 @@
       />
     </ul>
     <div class="mt-6 flex justify-between items-center">
-      <p>List is have {{ todos.length }} items</p>
-      <button class="p-2 text-[#f87171]" v-if="todos.length > 0" @click="deleteAllTodo">
+      <p>List is have {{ todoLocal.length }} items</p>
+      <button class="p-2 text-[#f87171]" v-if="todoLocal.length > 0" @click="deleteAllTodo">
         Delete All
       </button>
     </div>
@@ -22,33 +22,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import useLocalStorage from '@/utils/useLocalStorage';
 import AddTodo from './AddTodo.vue';
 import TodoItem from './TodoItem.vue';
 
 defineProps({ title: { type: String, required: true } });
-
-const todos: Array<string> = ref([]);
+const todoLocal = useLocalStorage<Array<string>>('todos', []);
 
 const createTodo = (value: string) => {
-  if (todos.value.includes(value)) {
+  if (todoLocal.value.includes(value)) {
     return;
   }
 
-  todos.value.push(value);
+  todoLocal.value.push(value);
 };
 
 const updateTodo = (idx: number, newTodo: string) => {
-  todos.value[idx] = newTodo;
+  todoLocal.value[idx] = newTodo;
 };
 
 const deleteTodo = (idx: number) => {
   if (idx !== -1) {
-    todos.value.splice(idx, 1);
+    todoLocal.value.splice(idx, 1);
   }
 };
 
 const deleteAllTodo = () => {
-  todos.value = [];
+  todoLocal.value = [];
 };
 </script>

@@ -32,7 +32,7 @@
             label="Phone Number"
             placeholder="Enter your phone number"
             type="number"
-            v-model="fields.phone"
+            v-model="fields.phone as unknown as string"
           />
         </div>
       </div>
@@ -42,14 +42,23 @@
 </template>
 
 <script setup lang="ts">
+import useLocalStorage from '@/utils/useLocalStorage';
+import { ref } from 'vue';
 import TextInput from '../CustomInput/TextInput.vue';
 import ErrorMsg from './ErrorMsg.vue';
-import { ref, reactive } from 'vue';
 
-const fields = reactive({
+interface SimplePerson {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: number;
+}
+
+const fields = useLocalStorage<SimplePerson>('todos2', {
   firstName: '',
   lastName: '',
-  email: ''
+  email: '',
+  phone: undefined
 });
 
 const errorDeps = ref({
@@ -60,7 +69,7 @@ const errorDeps = ref({
 });
 
 const onSubmit = () => {
-  const firstName = fields.firstName;
+  const firstName = fields?.value.firstName;
 
   if (firstName === '') {
     errorDeps.value.firstName = 'Không được để trống!';
