@@ -4,11 +4,17 @@
     <form @submit.prevent="onSubmit">
       <div class="w-full grid grid-cols-2 gap-x-2 gap-y-6">
         <div>
-          <TextInput
+          <!-- <TextInput
             label="First Name"
             placeholder="Enter your first name"
             id="fnInput"
+            v-model="fields.firstName" v-model lúc nào cũng phải để trên cùng
+          /> -->
+          <TextInput
             v-model="fields.firstName"
+            label="First Name"
+            placeholder="Enter your first name"
+            id="fnInput"
           />
           <ErrorMsg :text="errorDeps.firstName" :isShow="errorDeps.firstName !== ''" />
         </div>

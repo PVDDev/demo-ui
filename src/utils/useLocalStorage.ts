@@ -14,7 +14,7 @@ const useLocalStorage = <T>(key: string, defaultValue: T, options?: WatchOptions
 
   watch(
     data,
-    (values) => {
+    (values) => {// chỗ param này không khai báo type này
       localStorage.setItem(key, JSON.stringify(values));
     },
     {
