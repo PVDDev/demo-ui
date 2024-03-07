@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-const model = defineModel();
+const model = defineModel(); // cái này vue 3.2 không có 
 
 defineProps({
   label: String,
