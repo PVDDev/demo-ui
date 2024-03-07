@@ -4,12 +4,6 @@
     <form @submit.prevent="onSubmit">
       <div class="w-full grid grid-cols-2 gap-x-2 gap-y-6">
         <div>
-          <!-- <TextInput
-            label="First Name"
-            placeholder="Enter your first name"
-            id="fnInput"
-            v-model="fields.firstName" v-model lúc nào cũng phải để trên cùng
-          /> -->
           <TextInput
             v-model="fields.firstName"
             label="First Name"
@@ -19,26 +13,26 @@
           <ErrorMsg :text="errorDeps.firstName" :isShow="errorDeps.firstName !== ''" />
         </div>
         <TextInput
+          v-model="fields.lastName"
           label="Last Name"
           id="lnInput"
           placeholder="Enter your last name"
-          v-model="fields.lastName"
         />
         <div class="col-span-2">
           <TextInput
+            v-model="fields.email"
             id="mailInput"
             label="Email Address"
             placeholder="Enter your email address"
-            v-model="fields.email"
           />
         </div>
         <div class="col-span-2">
           <TextInput
+            v-model="fields.phone"
             id="phonenput"
             label="Phone Number"
             placeholder="Enter your phone number"
             type="number"
-            v-model="fields.phone as unknown as string"
           />
         </div>
       </div>

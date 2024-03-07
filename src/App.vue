@@ -3,19 +3,26 @@
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
     <div class="wrapper">
       <HelloWorld title="TODO App" description="A simple todo app whatever!" />
-      <nav>
+      <nav v-if="isAuthenticated">
         <RouterLink to="/">First Form</RouterLink>
         <RouterLink to="/secondView">Second Form</RouterLink>
+        <button @click="handleLogout">Logout</button>
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 import HelloWorld from './components/HelloWorld.vue';
+import { isAuthenticated, logout } from './router/auth';
+import router from './router';
+
+const handleLogout = () => {
+  logout();
+  router.push('/login');
+};
 </script>
 
 <style scoped>
